@@ -75,8 +75,8 @@ my $chr_size_file = '/store/data/UCSC/'.$sample->align->{'bwa'}->{'assembly'}.'/
 # Prepare command
 my $cmd = "samtools view -Sb -o $temp_bam $sam_input_file;".
           "samtools sort -m $memory $temp_bam $temp_sorted_bam_no_suffix;".
-          "genomeCoverageBed -bg -strand \"+\" -ibam $temp_sorted_bam_no_suffix.bam -g $chr_size_file > $temp_bedgraph_plus;".
-          "genomeCoverageBed -bg -strand \"-\" -ibam $temp_sorted_bam_no_suffix.bam -g $chr_size_file > $temp_bedgraph_minus;".
+          "genomeCoverageBed -split -bg -strand \"+\" -ibam $temp_sorted_bam_no_suffix.bam -g $chr_size_file > $temp_bedgraph_plus;".
+          "genomeCoverageBed -split -bg -strand \"-\" -ibam $temp_sorted_bam_no_suffix.bam -g $chr_size_file > $temp_bedgraph_minus;".
           "bedGraphToBigWig $temp_bedgraph_plus $chr_size_file $bigwig_output_file.plus.bw;".
           "bedGraphToBigWig $temp_bedgraph_minus $chr_size_file $bigwig_output_file.minus.bw";
 
